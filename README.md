@@ -5,17 +5,17 @@ CityJS command line tool.
 
 ## Usage
 
-  Usage: cityjs <command> [options]
+Usage: `cityjs <command> [options]`
 
-  Available commands:
+Available commands:
 
-  * init
-  * start
-  * install
-  * build
-  * publish
+* `init`
+* `start`
+* `install`
+* `build`
+* `publish`
 
-  Options:
+Options:
 
     -h, --help           output usage information
     -V, --version        output the version number
@@ -25,9 +25,9 @@ CityJS command line tool.
 
 CityJS website generation
 
-  Usage: cityjs init [options]
+Usage: `cityjs init [options]`
 
-  Options:
+Options:
 
     -o, --output [path]  set output directory
-    -n, --name [name]', set application or package name
+    -n, --name [name]    set application or package name
