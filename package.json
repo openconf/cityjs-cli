@@ -1,0 +1,39 @@
+{
+  "name": "cityjs-cli",
+  "version": "0.0.1",
+  "description": "CityJS command line tool",
+  "keywords": [
+    "cityjs"
+  ],
+  "homepage": "https://github.com/openconf/cityjs-cli",
+  "bugs": "https://github.com/openconf/cityjs-cli/issues",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/openconf/cityjs-cli.git"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec --compilers coffee:coffee-script"
+  },
+  "bin": {
+    "cityjs": "./bin/cityjs"
+  },
+  "dependencies": {
+    "coffee-script": "~1.6.1",
+    "commander": "~1.1.1",
+    "underscore": "~1.4.4",
+    "async": "~0.2.6",
+    "rimraf": "~2.1.4"
+  },
+  "devDependencies": {
+    "mocha": "~1.8.1"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "licenses": [
+    {
+      "type": "BSD"
+    }
+  ]
+}
