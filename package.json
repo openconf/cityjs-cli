@@ -24,7 +24,7 @@
     "commander": "~1.1.1",
     "underscore": "~1.4.4",
     "async": "~0.2.6",
-    "rimraf": "~2.1.4"
+    "node-fs": "~0.1.5"
   },
   "devDependencies": {
     "mocha": "~1.8.1"

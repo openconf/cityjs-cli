@@ -3,32 +3,38 @@ fs = require 'fs'
 path = require 'path'
 _ = require 'underscore'
 async = require 'async'
-rimraf = require 'rimraf'
+nodefs = require 'node-fs'
 generators = require '../node_modules/generator-cityjs/node_modules/yeoman-generator/'
 cityjsAppGenerator = require "#{__dirname}/../node_modules/generator-cityjs/app/"
 
+initialDir = process.cwd()
+
 engine =
 
-  init: (commander) ->
+  init: (commander, cb) ->
     generator = this._createGenerator 'cityjs:app', commander.name
-    generator.run {}, () ->
+    generator.run {}, cb
 
-  start: (commander) ->
+  start: (commander, cb) ->
     console.log 'Not implemented yet ;('
+    cb()
 
-  install: (commander) ->
+  install: (commander, cb) ->
     console.log 'Not implemented yet ;('
+    cb()
 
-  build: (commander) ->
+  build: (commander, cb) ->
     console.log 'Not implemented yet ;('
+    cb()
 
-  publish: (commander) ->
+  publish: (commander, cb) ->
     console.log 'Not implemented yet ;('
+    cb()
 
   _createGenerator: (name, args) ->
     env = generators()
     env.register cityjsAppGenerator, 'cityjs'
-    env.create name, {arguments: args}
+    env.create name, arguments: args
 
 run = () ->
   commander
@@ -41,7 +47,11 @@ run = () ->
   if commander.args.length == 0 or not engine[commander.args[0]]
     return commander.outputHelp()
 
-  commander.output = path.join process.cwd(), commander.output
-  engine[commander.args[0]] commander
+  outputDir = path.join process.cwd(), commander.output
+  nodefs.mkdirSync outputDir, null, true
+  process.chdir outputDir
+  engine[commander.args[0]] commander, (err) ->
+    console.error err if err
+    process.chdir initialDir
 
 module.exports.run = run
