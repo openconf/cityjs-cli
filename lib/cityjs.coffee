@@ -4,6 +4,8 @@ path = require 'path'
 _ = require 'underscore'
 async = require 'async'
 nodefs = require 'node-fs'
+grunt = require 'grunt'
+spawn  = require('child_process').spawn
 generators = require '../node_modules/generator-cityjs/node_modules/yeoman-generator/'
 cityjsAppGenerator = require "#{__dirname}/../node_modules/generator-cityjs/app/"
 
@@ -13,19 +15,22 @@ engine =
 
   init: (commander, cb) ->
     generator = this._createGenerator 'cityjs:app', commander.name
-    generator.run {}, cb
+    generator.run {}, (err) ->
+      cb err if err
+      npmName = 'npm'
+      npmName = 'npm.cmd' if process.platform is 'win32'
+      npmInstall = spawn npmName, ['install'], {stdio: 'inherit'}
+      npmInstall.on 'exit', cb
 
   start: (commander, cb) ->
-    console.log 'Not implemented yet ;('
-    cb()
+    grunt.tasks {tasks: ['default']}, cb
 
   install: (commander, cb) ->
     console.log 'Not implemented yet ;('
     cb()
 
   build: (commander, cb) ->
-    console.log 'Not implemented yet ;('
-    cb()
+    grunt.tasks {tasks: ['build']}, cb
 
   publish: (commander, cb) ->
     console.log 'Not implemented yet ;('
