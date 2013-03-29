@@ -4,11 +4,14 @@ path = require 'path'
 _ = require 'underscore'
 async = require 'async'
 rimraf = require 'rimraf'
+generators = require '../node_modules/generator-cityjs/node_modules/yeoman-generator/'
+cityjsAppGenerator = require "#{__dirname}/../node_modules/generator-cityjs/app/"
 
 engine =
 
   init: (commander) ->
-    console.log 'Not implemented yet ;('
+    generator = this._createGenerator 'cityjs:app', commander.name
+    generator.run {}, () ->
 
   start: (commander) ->
     console.log 'Not implemented yet ;('
@@ -21,6 +24,11 @@ engine =
 
   publish: (commander) ->
     console.log 'Not implemented yet ;('
+
+  _createGenerator: (name, args) ->
+    env = generators()
+    env.register cityjsAppGenerator, 'cityjs'
+    env.create name, {arguments: args}
 
 run = () ->
   commander

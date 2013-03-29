@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "coffee-script": "~1.6.1",
+    "generator-cityjs": "~0.0.1",
     "commander": "~1.1.1",
     "underscore": "~1.4.4",
     "async": "~0.2.6",

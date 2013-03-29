@@ -5,6 +5,11 @@ CityJS command line tool.
 
 ## Usage
 
+Install `cityjs-cli`:
+```
+npm install cityjs-cli
+```
+
 Usage: `cityjs <command> [options]`
 
 Available commands:
