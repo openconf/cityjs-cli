@@ -15,6 +15,7 @@ Usage: `cityjs <command> [options]`
 Available commands:
 
 * `init`
+* `update`
 * `start`
 * `install`
 * `build`
@@ -28,11 +29,21 @@ Options:
 
 ### Init
 
-CityJS website generation
+CityJS website generation.
 
-Usage: `cityjs init [options]`
+Usage: `cityjs init <git repo> [options]`
 
 Options:
 
     -o, --output [path]  set output directory
     -n, --name [name]    set application or package name
+
+### Update
+
+Pulling all changes from remote repo.
+
+Usage: `cityjs update [options]`
+
+Options:
+
+    -o, --output [path] working directory
