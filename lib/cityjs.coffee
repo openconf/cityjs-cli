@@ -1,7 +1,6 @@
 commander = require 'commander'
 fs = require 'fs'
 path = require 'path'
-_ = require 'underscore'
 async = require 'async'
 nodefs = require 'node-fs'
 grunt = require 'grunt'
@@ -17,18 +16,16 @@ engine =
   init: (commander, cb) ->
     if commander.args.length < 2
       return commander.outputHelp()
+
     repo =  commander.args[1];
-    this._git "clone #{repo} .", (err) =>
-      return cb err if err
-      generator = this._createGenerator 'cityjs:app', commander.name
-      generator.run {}, (err) =>
-        return cb err if err
-        npmName = 'npm'
-        npmName = 'npm.cmd' if process.platform is 'win32'
-        npmInstall = spawn npmName, ['install'], {stdio: 'inherit'}
-        npmInstall.on 'exit', (err) =>
-          cb err if err
-          this.build commander, cb
+    generator = this._createGenerator 'cityjs:app', commander.name
+
+    gitClone    = (done) => this._git "clone #{repo} .", done
+    generateApp = (done) => generator.run {}, done
+    npmInstall  = (done) => this._npm  ['install'], done
+    build       = (done) => this.build commander, done
+
+    async.series [gitClone, generateApp, npmInstall, build], cb
 
   update: (commander, cb) ->
     #TODO: master or gh-pages?
@@ -46,10 +43,10 @@ engine =
 
   publish: (commander, cb) ->
 
-    build = (done) => this.build commander, done
-    gitAdd = (done) => this._git 'add -A', done
+    build     = (done) => this.build commander, done
+    gitAdd    = (done) => this._git 'add -A', done
     gitCommit = (done) => this._git 'commit -m message', done
-    gitPush = (done) => this._git 'push origin master', done
+    gitPush   = (done) => this._git 'push origin master', done
 
     async.series [build, gitAdd, gitCommit, gitPush], cb
 
@@ -62,11 +59,18 @@ engine =
 
   _git: (command, cb) ->
     exec 'git --version', (err) ->
-      console.error 'Git executable not found.' if err
-      return cb err if err
+      if err
+        console.error 'Git executable not found.'
+        return cb()
       exec "git #{command}", (err, stdout, stderr) ->
         console.log stdout
         cb err
+
+  _npm: (params, cb) ->
+    npmName = 'npm'
+    npmName = 'npm.cmd' if process.platform is 'win32'
+    npm = spawn npmName, params, {stdio: 'inherit'}
+    npm.on 'exit', cb
 
 run = () ->
   commander
