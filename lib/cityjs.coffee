@@ -45,9 +45,13 @@ engine =
     grunt.tasks 'build', {}, cb
 
   publish: (commander, cb) ->
-    #TODO: Git add -A ; git ci -am 'some text'; git push origin <master|gh-pages>
-    console.log 'Not implemented yet ;('
-    cb()
+
+    build = (done) => this.build commander, done
+    gitAdd = (done) => this._git 'add -A', done
+    gitCommit = (done) => this._git 'commit -m message', done
+    gitPush = (done) => this._git 'push origin master', done
+
+    async.series [build, gitAdd, gitCommit, gitPush], cb
 
   _createGenerator: (name, args) ->
     env = generators()
@@ -57,25 +61,27 @@ engine =
       options: { silent: true }
 
   _git: (command, cb) ->
-    exec 'git --version', (err, stdout, stderr) ->
+    exec 'git --version', (err) ->
       console.error 'Git executable not found.' if err
       return cb err if err
-      exec "git #{command}", cb
+      exec "git #{command}", (err, stdout, stderr) ->
+        console.log stdout
+        cb err
 
 run = () ->
   commander
     .version('0.0.1')
     .usage('<command> [options] \n\n  where <command> is one of: init, update, start, install, build, publish')
-    .option('-o, --output [path]', 'set output directory', '.')
+    .option('-d, --directory [path]', 'working directory', '.')
     .option('-n, --name [name]', 'set application or package', undefined)
     .parse process.argv
 
   if commander.args.length == 0 or not engine[commander.args[0]]
     return commander.outputHelp()
 
-  outputDir = path.join process.cwd(), commander.output
-  nodefs.mkdirSync outputDir, null, true
-  process.chdir outputDir
+  workingDir = path.join process.cwd(), commander.directory
+  nodefs.mkdirSync workingDir, null, true
+  process.chdir workingDir
   engine[commander.args[0]] commander, (err) ->
     console.error err if err
     process.chdir initialDir

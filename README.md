@@ -25,7 +25,7 @@ Options:
 
     -h, --help           output usage information
     -V, --version        output the version number
-    -o, --output [path]  set output directory
+    -d, --directory [path]  set output directory
 
 ### Init
 
@@ -35,15 +35,55 @@ Usage: `cityjs init <git repo> [options]`
 
 Options:
 
-    -o, --output [path]  set output directory
-    -n, --name [name]    set application or package name
+    -d, --directory [path]  working directory
+    -n, --name [name]       application or package name
 
 ### Update
 
-Pulling all changes from remote repo.
+Pulls all changes from remote repo.
 
 Usage: `cityjs update [options]`
 
 Options:
 
-    -o, --output [path] working directory
+    -d, --directory [path]  working directory
+
+### Install
+
+Installs given extension.
+
+Usage: `cityjs install <extension> [options]`
+
+Options:
+
+    -d, --directory [path]  working directory
+
+### Start
+
+Starts developer server (Coffee compiler, livereload, etc.).
+
+Usage: `cityjs start [options]`
+
+Options:
+
+    -d, --directory [path]  working directory
+
+### Build
+
+Builds application.
+
+Usage: `cityjs build [options]`
+
+Options:
+
+    -d, --directory [path]  working directory
+
+### Publish
+
+Commits all changes and pushes to remote repo.
+
+Usage: `cityjs publish [options]`
+
+Options:
+
+    -d, --directory [path]  working directory
