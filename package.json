@@ -1,6 +1,6 @@
 {
   "name": "cityjs-cli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "CityJS command line tool",
   "keywords": [
     "cityjs"

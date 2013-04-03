@@ -28,7 +28,6 @@ engine =
     async.series [gitClone, generateApp, npmInstall, build], cb
 
   update: (commander, cb) ->
-    #TODO: master or gh-pages?
     this._git "pull origin master", cb
 
   start: (commander, cb) ->
@@ -42,7 +41,6 @@ engine =
     grunt.tasks 'build', {}, cb
 
   publish: (commander, cb) ->
-
     build     = (done) => this.build commander, done
     gitAdd    = (done) => this._git 'add -A', done
     gitCommit = (done) => this._git 'commit -m message', done
@@ -58,13 +56,9 @@ engine =
       options: { silent: true }
 
   _git: (command, cb) ->
-    exec 'git --version', (err) ->
-      if err
-        console.error 'Git executable not found.'
-        return cb()
-      exec "git #{command}", (err, stdout, stderr) ->
-        console.log stdout
-        cb err
+    exec "git #{command}", (err, stdout, stderr) ->
+      console.log stdout
+      cb err
 
   _npm: (params, cb) ->
     npmName = 'npm'
