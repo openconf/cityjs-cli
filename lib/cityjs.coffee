@@ -15,22 +15,24 @@ engine =
 
   init: (commander, cb) ->
     generator = this._createGenerator 'cityjs:app', commander.name
-    generator.run {}, (err) ->
+    generator.run {}, (err) =>
       cb err if err
       npmName = 'npm'
       npmName = 'npm.cmd' if process.platform is 'win32'
       npmInstall = spawn npmName, ['install'], {stdio: 'inherit'}
-      npmInstall.on 'exit', cb
+      npmInstall.on 'exit', (err) =>
+        cb err if err
+        this.build commander, cb
 
   start: (commander, cb) ->
-    grunt.tasks {tasks: ['default']}, cb
+    grunt.tasks 'default', {}, cb
 
   install: (commander, cb) ->
     console.log 'Not implemented yet ;('
     cb()
 
   build: (commander, cb) ->
-    grunt.tasks {tasks: ['build']}, cb
+    grunt.tasks 'build', {}, cb
 
   publish: (commander, cb) ->
     console.log 'Not implemented yet ;('
@@ -39,7 +41,9 @@ engine =
   _createGenerator: (name, args) ->
     env = generators()
     env.register cityjsAppGenerator, 'cityjs'
-    env.create name, arguments: args
+    env.create name,
+      arguments: args,
+      options: { silent: true }
 
 run = () ->
   commander
