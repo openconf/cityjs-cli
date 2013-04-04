@@ -37,6 +37,7 @@ Options:
 
     -d, --directory [path]  working directory
     -n, --name [name]       application or package name
+    -g, --github_pages      use `gh-pages` branch
 
 ### Update
 
@@ -50,9 +51,9 @@ Options:
 
 ### Install
 
-Installs given extension.
+Installs given package.
 
-Usage: `cityjs install <extension> [options]`
+Usage: `cityjs install <package> [options]`
 
 Options:
 

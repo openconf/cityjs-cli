@@ -1,6 +1,6 @@
 {
   "name": "cityjs-cli",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "CityJS command line tool",
   "keywords": [
     "cityjs"
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "coffee-script": "~1.6.1",
-    "generator-cityjs": "~0.0.3",
+    "generator-cityjs": "~0.0.4",
     "commander": "~1.1.1",
     "async": "~0.2.6",
     "node-fs": "~0.1.5",
