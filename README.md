@@ -9,13 +9,11 @@ usual sense. This will be a single page application that will consume static con
 pages. Than the architecture will be package based (using requirejs) and we gotta do that super easy! or die :(
 
 To be strong we need to be connected. That's why those static sites will also be able to follow each other and
-thus we will create decentralized source of geek events, based on github pages or any other simple static sites hostings/.
+thus we will create decentralized source of geek events, based on github pages or any other simple static sites hostings.
 
 Stuff that is not possible to do static we will build as open API's with decentralized authentication. I guess we will use browserID. We will use free hosting like nodejitsu - go for it! They support open source initiatives and what could be more open than stuff we are planning to do?
 
-So wear your I'm hacker and I know it t-shirt and go for it:
-
-* TODO: write what to do
+So wear your I'm hacker and I know it t-shirt and go for it - check issues.
 
 
 CityJS command line tool.
