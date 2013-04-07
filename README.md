@@ -88,3 +88,12 @@ Usage: `cityjs publish [options]`
 Options:
 
     -d, --directory [path]  working directory
+
+#Roadmap
+
+The goal Is to build Event site generator. Since we probably use it for JS events the name obviously CityJS.
+Since building this stuff should be fun we will do crazy things. First of all we won't generate static site in
+usual sense. This will be a single page application that will consume static configurations to render meaningfull 
+pages. Than the architecture will be package based (using requirejs) and we gotta do that super easy! or die :(
+
+

@@ -30,6 +30,7 @@ engine =
 
     async.series [gitClone, gitBranch, gitConfig, generateApp, npmInstall, build], cb
 
+	#TODO: it should update all packages instead of pulling repo I guess
   update: (commander, cb) ->
     this._git 'pull origin', cb
 
@@ -39,7 +40,7 @@ engine =
   install: (commander, cb) ->
     if commander.args.length < 2
       return commander.outputHelp()
-    packageName =  commander.args[1];
+    packageName =  commander.args[1]
     generator = this._createGenerator 'cityjs:package', packageName
     generator.run {}, cb
 
